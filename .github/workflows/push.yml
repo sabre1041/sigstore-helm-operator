@@ -67,7 +67,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Login to Registry
-        run: echo $GITHUB_TOKEN | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
 
       - name: "Build and Push Operator Image"
         uses: docker/build-push-action@v2

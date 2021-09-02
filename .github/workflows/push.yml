@@ -96,6 +96,10 @@ jobs:
           CSV_FILE: bundle/manifests/${{ env.REPOSITORY_NAME }}.clusterserviceversion.yaml
           TAGS_TO_DIGESTS: ${OPERATOR_IMAGE_TAG}
 
+      - name: "Copy bundle dockerfile"
+        shell: bash
+        run: sed  's/bundle\///g' bundle.Dockerfile > bundle/Dockerfile
+
       - name: Archive the bundle
         if: "startsWith(github.ref, 'refs/tags')"
         run: tar czvf ${{ env.REPOSITORY_NAME }}-bundle-${{ env.BUNDLE_IMAGE_TAG }}.tar.gz bundle

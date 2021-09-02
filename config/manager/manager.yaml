@@ -22,16 +22,12 @@ spec:
       labels:
         control-plane: controller-manager
     spec:
-      securityContext:
-        runAsNonRoot: true
       containers:
         - args:
             - --leader-elect
             - --leader-election-id=sigstore-helm-operator
           image: controller:latest
           name: manager
-          securityContext:
-            allowPrivilegeEscalation: false
           livenessProbe:
             httpGet:
               path: /healthz
